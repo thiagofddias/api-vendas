@@ -11,12 +11,12 @@ interface ITemplateVariable {
 }
 
 interface IParseMailTemplate {
-  template: string;
+  file: string;
   variables: ITemplateVariable;
 }
 
 interface ISendMail {
-  to: string;
+  to: IMailContact;
   from?: IMailContact;
   subject: string;
   templateData: IParseMailTemplate;
@@ -49,14 +49,14 @@ export default class EtherealMail {
         address: from?.email || 'equipe@apivendas.com.br',
       },
       to: {
-        name: from?.name,
-        address: from?.email,
+        name: to.name,
+        address: to.email,
       },
       subject,
       html: await mailTemplate.parse(templateData),
     });
 
     console.log('Message sent: %s', message.messageId);
-    console.log('Previeu URL %s', nodemailer.getTestMessageUrl(message));
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(message));
   }
 }
