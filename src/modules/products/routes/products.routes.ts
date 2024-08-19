@@ -9,7 +9,11 @@ productsRouter.get('/', productsController.index);
 
 productsRouter.get(
   '/:id',
-  celebrate({ [Segments.PARAMS]: { id: Joi.string().uuid().required() } }),
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
   productsController.show,
 );
 
@@ -33,14 +37,20 @@ productsRouter.put(
       price: Joi.number().precision(2).required(),
       quantity: Joi.number().required(),
     },
-    [Segments.PARAMS]: { id: Joi.string().uuid().required() },
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
   }),
   productsController.update,
 );
 
 productsRouter.delete(
   '/:id',
-  celebrate({ [Segments.PARAMS]: { id: Joi.string().uuid().required() } }),
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
   productsController.delete,
 );
 
