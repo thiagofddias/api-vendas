@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
+import CreateProductService from '../services/CreateProductService';
+import DeleteProductService from '../services/DeleteProductService';
 import ListProductService from '../services/ListProductService';
 import ShowProductService from '../services/ShowProductService';
-import CreateProductService from '../services/CreateProductService';
 import UpdateProductService from '../services/UpdateProductService';
-import DeleteProductService from '../services/DeleteProductService';
-import AppError from '@shared/errors/AppError';
 
 export default class ProductsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -26,29 +25,17 @@ export default class ProductsController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    try {
-      const { name, price, quantity } = request.body;
+    const { name, price, quantity } = request.body;
 
-      const createProduct = new CreateProductService();
+    const createProduct = new CreateProductService();
 
-      const product = await createProduct.execute({
-        name,
-        price,
-        quantity,
-      });
+    const product = await createProduct.execute({
+      name,
+      price,
+      quantity,
+    });
 
-      return response.status(201).json(product);
-    } catch (error) {
-      if (error instanceof AppError) {
-        return response
-          .status(error.statusCode)
-          .json({ status: 'error', message: error.message });
-      }
-
-      return response
-        .status(500)
-        .json({ status: 'error', message: 'Internal server error' });
-    }
+    return response.json(product);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
