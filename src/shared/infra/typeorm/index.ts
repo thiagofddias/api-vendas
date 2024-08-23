@@ -1,5 +1,4 @@
 import { DataSource } from 'typeorm';
-
 import User from '@modules/users/infra/typeorm/entities/User';
 import UserToken from '@modules/users/infra/typeorm/entities/UserToken';
 import Customer from '@modules/customers/infra/typeorm/entities/Customer';
