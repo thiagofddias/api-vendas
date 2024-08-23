@@ -17,9 +17,9 @@ To Use:
      
       ```docker-compose up```
 
-  6. Initialize the API:
-      
-    ```yarn dev```
+  5. Initialize the API:
+
+      ```yarn dev```
 
 
 
